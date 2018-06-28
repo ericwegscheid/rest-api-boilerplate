@@ -48,6 +48,8 @@ server.listen(config.port, () => {
 	console.log('server is listening on port ' + config.port + ' in "' + config.envName + '" mode');
 });
 
+// @TODO: check to ensure database tables exist (see api definitions)
+
 var handlers = {
 	ping: (data, callback) => {
 		callback(206);

@@ -1,11 +1,20 @@
+var database = {
+	host: process.env.DB_HOST || 'localhost',
+	database: process.env.DB_NAME || 'rest-api',
+	user: process.env.DB_USER || 'root',
+	password: process.env.DB_PASSWORD || ''
+};
+
 var environment = {
-	staging: {
+	develop: {
 		port: 3000,
-		envName: 'staging'
+		envName: 'staging',
+		database: database
 	},
 	production: {
 		port: 5000,
-		envName: 'production'
+		envName: 'production',
+		database: database
 	}
 };
 
