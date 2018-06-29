@@ -1,2 +1,5 @@
 # ignore private keys and certificate
 ssl/*.pem
+
+# ignore node modules
+node_modules/
