@@ -8,7 +8,7 @@ var database = {
 var environment = {
 	develop: {
 		port: 3000,
-		envName: 'staging',
+		envName: 'develop',
 		database: database
 	},
 	production: {
@@ -24,7 +24,7 @@ module.exports = environment[
 	// use env passed in
 	typeof(process.env.NODE_ENV) == 'string' ? process.env.NODE_ENV.toLowerCase() : ''
 
-	// default to staging
-	] || environment.staging;
+	// default to develop
+	] || environment.develop;
 
 

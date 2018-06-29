@@ -3,6 +3,7 @@ const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 const config = require('./config');
 const fs = require('fs');
+const router = require('./lib/router');
 
 // instantiate https server
 var server = https.createServer({
@@ -26,7 +27,12 @@ var server = https.createServer({
 		req.on('end', () => {
 			buffer += decoder.end();
 
-			(router[trimmedPath] || handlers.notFound)(
+			console.log(router);
+
+			// call handler
+			(router[trimmedPath] || router.notFound)(
+
+				// data passed to handler
 				{
 					trimmedPath: trimmedPath,
 					queryStringObject: queryStringObject,
@@ -34,6 +40,8 @@ var server = https.createServer({
 					headers: headers,
 					payload: buffer
 				},
+
+				// callback passed to handler
 				(statusCode, payload) => {
 					res.setHeader('Content-Type', 'application/json');
 					res.writeHead(statusCode.constructor === Number ? statusCode  : 200);
@@ -44,21 +52,11 @@ var server = https.createServer({
 	}
 );
 
+console.log(config);
+
 server.listen(config.port, () => {
 	console.log('server is listening on port ' + config.port + ' in "' + config.envName + '" mode');
 });
 
 // @TODO: check to ensure database tables exist (see api definitions)
 
-var handlers = {
-	ping: (data, callback) => {
-		callback(206);
-	},
-	notFound: (data, callback) => {
-		callback(404);
-	}
-};
-
-var router = {
-	ping: handlers.ping
-};
