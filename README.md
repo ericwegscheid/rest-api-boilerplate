@@ -1,3 +1,5 @@
+## _Warning_ work in progress...
+* You probably don't want to use this, unless of course, you plan to finish things in your own way.
 
 ## Generic Rest API
 
